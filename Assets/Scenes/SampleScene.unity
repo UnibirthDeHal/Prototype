@@ -2963,8 +2963,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a55e24b0bc60144a6ce0431917204d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  animator: {fileID: 0}
+  spriteRenderer: {fileID: 1086720991}
+  animator: {fileID: 1086720993}
+  moveSpeed: 5
+  jumpForce: 7
+  groundCheck: {fileID: 1393916852}
+  groundCheckRadius: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
   dir: 0
   move_speed: 3
   timer_noInput: 0
