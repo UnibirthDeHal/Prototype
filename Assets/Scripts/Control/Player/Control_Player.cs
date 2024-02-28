@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
-
+//aaa
 public class ControlPlayer : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
