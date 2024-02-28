@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEngine.EventSystems.EventTrigger;
-
+﻿using UnityEngine;
 
 public class ControlPlayer : MonoBehaviour
 {
-
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+    public float moveSpeed = 5f;
+    public float jumpForce = 7f;
 
-    //public float health = 10;                                 
-    //[HideInInspector] public float cd_hurt;                     
-
+    private Rigidbody rb;
+    private bool isGrounded;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.5f;
+    public LayerMask whatIsGround;
     [HideInInspector] public int dir;                           // 向き（2上 4左 8下 6右）
 
     //（!）Stateに関する変数はStateのScriptで管理しないように
@@ -24,62 +19,56 @@ public class ControlPlayer : MonoBehaviour
     public float move_speed;                                    // 移動速度
     [HideInInspector] public float timer_noInput;           // （timer）入力していない時間
     [HideInInspector] public float threshold_noInput;    // 入力していない時間の閾値(しきいち)
-
-    //状态机（StateMachine）
-    private IState state_current;
+    private IState currentState;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
-    }
-    void OnDestroy()
-    {
-
+        rb = GetComponent<Rigidbody>(); // Rigidbody for 3D
     }
 
-    // Start is called before the first frame update
-    void Start()        // 初期化
+    void Start()
     {
         ChangeState(new Player_State_Idle(this));
-
-        dir = 6;                    // 登場時の向き（右）
-        //cd_hurt = 2f;           
-
-        //【State】移动（Move）
-        timer_noInput = 0;
-        threshold_noInput = 0.1f;
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // 現在のステート
-        state_current?.Execute();
+        currentState?.Execute();
 
+        // Ground check for 3D
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Jump();
+        }
     }
-
-
-
 
     public void ChangeState(IState newState)
     {
-        state_current?.Exit();
-        state_current = newState;
-        state_current.Enter();
+        currentState?.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
+
     public void SetAnimation(string animationName)
     {
         animator.Play(animationName);
     }
 
-    //「アニメションが終わったか？」をチェック
     public bool AnimationFinished(string animationName)
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
     }
 
+    private void Jump()
+    {
+        // Apply a vertical force for the jump in 3D
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        // Optionally, set a "jump" animation here
+        SetAnimation("Jump");
+    }
 }
