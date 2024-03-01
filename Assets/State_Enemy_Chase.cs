@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
+//using UnityEngine.Scripting;
 
-public class State_Enemy_Chase : IState
+//[ExtensionOfNativeClass]
+public class State_Enemy_Chase : MonoBehaviour
 {
     private Control_Enemy enemy;
+    private Transform playerTransform;  // プレイヤーの Transform コンポーネント
 
     public State_Enemy_Chase(Control_Enemy enemy)
     {
@@ -15,12 +18,13 @@ public class State_Enemy_Chase : IState
     public void Enter()
     {
         // Chase 状態に入ったときの初期化などを行う
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void Execute()
     {
         // プレイヤーの位置を取得
-        Vector3 playerPosition = /* プレイヤーの位置を取得するコードを追加 */;
+        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         // プレイヤーを追従する処理
         ChasePlayer(playerPosition);
@@ -36,7 +40,7 @@ public class State_Enemy_Chase : IState
     private void ChasePlayer(Vector3 playerPosition)
     {
         // プレイヤーの位置に向かって移動する処理をここに追加
-        // 例: enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, playerPosition, enemy.moveSpeed * Time.deltaTime);
+        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, playerPosition, enemy.moveSpeed * Time.deltaTime);
     }
 }
 
