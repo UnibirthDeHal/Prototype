@@ -19,6 +19,19 @@ public class State_Enemy_Idle : MonoBehaviour
 
     public void Execute()
     {
+        // プレイヤーの位置を取得
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3 playerPosition = playerTransform.position;
+
+        // エネミーとプレイヤーの距離を計算
+        float distanceToPlayer = Vector3.Distance(enemy.transform.position, playerPosition);
+
+        // 一定範囲以下になった場合、Chase 状態に遷移
+        if (distanceToPlayer < 5f) // 5fは適切な範囲の例です
+        {
+            enemy.ChangeState(new State_Enemy_Chase(enemy));
+        }
+
         // Idle 状態で毎フレーム実行される処理
     }
 
