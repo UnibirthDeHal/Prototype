@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class State_Enemy_Idle : IState
+public class State_Enemy_Idle : MonoBehaviour
 {
     private Control_Enemy enemy;
 
