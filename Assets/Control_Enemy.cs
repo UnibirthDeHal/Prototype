@@ -43,10 +43,15 @@ public class Control_Enemy : MonoBehaviour
 
     }
 
-    public void ChangeState(IState newState)
+    //public void ChangeState(IState newState)
+    //{
+    //    currentState?.Exit();
+    //    currentState = newState;
+    //    currentState.Enter();
+    //}
+
+    internal void ChangeState(State_Enemy_Chase state_Enemy_Chase)
     {
-        currentState?.Exit();
-        currentState = newState;
-        currentState.Enter();
+        throw new NotImplementedException();
     }
 }
