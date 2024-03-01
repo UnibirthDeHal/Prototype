@@ -5,7 +5,7 @@ using UnityEngine;
 //using UnityEngine.Scripting;
 
 //[ExtensionOfNativeClass]
-public class State_Enemy_Chase : MonoBehaviour
+public class State_Enemy_Chase : IState
 {
     private Control_Enemy enemy;
     private Transform playerTransform;  // プレイヤーの Transform コンポーネント
