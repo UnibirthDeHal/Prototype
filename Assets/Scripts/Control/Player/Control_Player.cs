@@ -16,6 +16,8 @@ public class ControlPlayer : MonoBehaviour
 
     private Rigidbody rb;
     private bool isGrounded;
+
+    
     public Transform groundCheck;
     public float groundCheckRadius = 0.5f;
     public LayerMask whatIsGround;
@@ -45,8 +47,9 @@ public class ControlPlayer : MonoBehaviour
         currentState?.Execute();
 
         // Ground check for 3D
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, whatIsGround);
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, whatIsGround);
 
+        // 地面にいるときのみジャンプを許可する
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
@@ -73,9 +76,31 @@ public class ControlPlayer : MonoBehaviour
 
     private void Jump()
     {
-        // Apply a vertical force for the jump in 3D
+        // 垂直方向の力を加えてジャンプする
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        // Optionally, set a "jump" animation here
+
+        // ジャンプアニメーションを設定する（アニメーションがある場合）
         SetAnimation("Jump");
+
+        // ジャンプしたので、地面から離れたと見なす
+        isGrounded = false;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // 地面に触れているかを確認する
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        // 地面から離れたことを検出する
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
