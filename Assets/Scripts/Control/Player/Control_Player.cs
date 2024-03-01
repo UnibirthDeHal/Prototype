@@ -56,6 +56,15 @@ public class ControlPlayer : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            // Itemとの接触時の処理をここに記述
+            Destroy(other.gameObject); // 例: Itemを消去する
+        }
+    }
+
     public void ChangeState(IState newState)
     {
         currentState?.Exit();
