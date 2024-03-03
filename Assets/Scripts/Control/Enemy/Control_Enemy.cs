@@ -34,13 +34,13 @@ public class Control_Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ChangeState(new Enemy_State_Idle(this)); --------- ÉGÉâÅ[èoÇÈ
+        ChangeState(new State_Enemy_Idle(this));
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        currentState?.Execute();
     }
 
     //public void ChangeState(IState newState)
@@ -50,8 +50,15 @@ public class Control_Enemy : MonoBehaviour
     //    currentState.Enter();
     //}
 
-    internal void ChangeState(State_Enemy_Chase state_Enemy_Chase)
+    //internal void ChangeState(State_Enemy_Chase state_Enemy_Chase)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    public void ChangeState(IState newState)
     {
-        throw new NotImplementedException();
+        currentState?.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 }
