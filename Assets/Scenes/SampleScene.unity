@@ -4557,15 +4557,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2492383923114322996, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.35
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2492383923114322996, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.23
+      value: 1.48
       objectReference: {fileID: 0}
     - target: {fileID: 2492383923114322996, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.03
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2492383923114322996, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4600,8 +4600,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 750394909}
     - target: {fileID: 6568208501059080648, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
+      propertyPath: groundCheckRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568208501059080648, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: whatIsGround.m_Bits
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

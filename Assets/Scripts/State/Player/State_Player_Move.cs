@@ -42,8 +42,9 @@ public class Player_State_Move : IState
 
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
-            player.timer_noInput += Time.deltaTime;
+            player.ChangeState(new Player_State_Idle(player));
         }
+    
 
         // //【状態遷移】Idle状態に（入力していない時間が閾値を超えると）
         if (player.timer_noInput > player.threshold_noInput)

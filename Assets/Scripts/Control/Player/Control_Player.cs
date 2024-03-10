@@ -25,8 +25,11 @@ public class ControlPlayer : MonoBehaviour
 
     // Rigidbodyの定義を修正
     private Rigidbody rb;
-
     private IState currentState;
+    private Transform _transform;
+    // このフラグはプレイヤーが地面にいるかどうかを追跡します
+    internal bool isGrounded;
+   
 
     private void Awake()
     {
@@ -37,26 +40,61 @@ public class ControlPlayer : MonoBehaviour
 
     void Start()
     {
+        _transform = transform;
         ChangeState(new Player_State_Idle(this));
     }
+
 
     void Update()
     {
         currentState?.Execute();
 
-        // 地面にいるかどうかのチェックは、各ステート内で実施
-        // ジャンプ入力を検出
-        if (Input.GetButtonDown("Jump"))
+        // レイキャストのスタート地点をプレイヤーのタグから決定します。
+        // ここでは groundCheck 位置を使用していますが、これはプレイヤーにアタッチされているべきです。
+        Vector3 rayStart = groundCheck.position;
+        Vector3 rayDirection = Vector3.down;
+        float rayLength = 1f; // レイキャストの長さ、プレイヤーが浮いているかどうかを判断するのに十分な長さに設定する
+        RaycastHit hit;
+
+        // レイキャストを放出し、ヒットしたものが "Ground" レイヤーに属しているかを確認する
+        if (Physics.Raycast(rayStart, rayDirection, out hit, rayLength, whatIsGround))
+        {
+            isGrounded = hit.collider != null;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+
+        // 接地状態のデバッグログ
+        Debug.Log($"Grounded: {isGrounded}");
+
+        // デバッグ用にレイをシーンに表示
+        Debug.DrawRay(rayStart, rayDirection * rayLength, isGrounded ? Color.green : Color.red);
+
+        // ジャンプ入力の検出
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             ChangeState(new Player_State_Jump(this));
         }
+        // 移動入力の検出（水平軸が0でない場合）
+        else if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            ChangeState(new Player_State_Move(this));
+        }
+        // 何も入力がない場合
+        else if (Input.GetAxisRaw("Horizontal") == 0 && isGrounded)
+        {
+            ChangeState(new Player_State_Idle(this));
+        }
     }
 
+    // 状態を変更するメソッド
     public void ChangeState(IState newState)
     {
-        currentState?.Exit();
+        currentState?.Exit(); // 現在の状態の Exit を呼び出し
         currentState = newState;
-        currentState.Enter();
+        currentState.Enter(); // 新しい状態の Enter を呼び出し
     }
 
     public void SetAnimation(string animationName)
@@ -80,33 +118,5 @@ public class ControlPlayer : MonoBehaviour
     }
 
    
-   //private void Jump()
-   //{
-   //    // 垂直方向の力を加えてジャンプする
-   //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-   //
-   //    // ジャンプアニメーションを設定する（アニメーションがある場合）
-   //    SetAnimation("Jump");
-   //
-   //    // ジャンプしたので、地面から離れたと見なす
-   //    isGrounded = false;
-   //}
-   //
-   //void OnCollisionEnter(Collision collision)
-   //{
-   //    // 地面に触れているかを確認する
-   //    if (collision.gameObject.CompareTag("Ground"))
-   //    {
-   //        isGrounded = true;
-   //    }
-   //}
-   //
-   //void OnCollisionExit(Collision collision)
-   //{
-   //    // 地面から離れたことを検出する
-   //    if (collision.gameObject.CompareTag("Ground"))
-   //    {
-   //        isGrounded = false;
-   //    }
-   //}
+  
 }
