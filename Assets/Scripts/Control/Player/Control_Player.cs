@@ -49,46 +49,39 @@ public class ControlPlayer : MonoBehaviour
     {
         currentState?.Execute();
 
-        // レイキャストのスタート地点をプレイヤーのタグから決定します。
-        // ここでは groundCheck 位置を使用していますが、これはプレイヤーにアタッチされているべきです。
-        Vector3 rayStart = groundCheck.position;
-        Vector3 rayDirection = Vector3.down;
-        float rayLength = 1f; // レイキャストの長さ、プレイヤーが浮いているかどうかを判断するのに十分な長さに設定する
-        RaycastHit hit;
-
-        // レイキャストを放出し、ヒットしたものが "Ground" レイヤーに属しているかを確認する
-        if (Physics.Raycast(rayStart, rayDirection, out hit, rayLength, whatIsGround))
-        {
-            isGrounded = hit.collider != null;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-
-        // 接地状態のデバッグログ
-        Debug.Log($"Grounded: {isGrounded}");
-
-        // デバッグ用にレイをシーンに表示
-        Debug.DrawRay(rayStart, rayDirection * rayLength, isGrounded ? Color.green : Color.red);
+        CheckGroundedStatus();
 
         // ジャンプ入力の検出
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
+
         {
             ChangeState(new Player_State_Jump(this));
         }
-        // 移動入力の検出（水平軸が0でない場合）
-        else if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            ChangeState(new Player_State_Move(this));
-        }
-        // 何も入力がない場合
-        else if (Input.GetAxisRaw("Horizontal") == 0 && isGrounded)
-        {
-            ChangeState(new Player_State_Idle(this));
-        }
+
+        //// 移動入力の検出（水平軸が0でない場合）
+        //else if (Input.GetAxisRaw("Horizontal") != 0)
+        //{
+        //    ChangeState(new Player_State_Move(this));
+        //}
+        //// 何も入力がない場合
+        //else if (Input.GetAxisRaw("Horizontal") == 0 && isGrounded)
+        //{
+        //    ChangeState(new Player_State_Idle(this));
+        //}
     }
 
+    void CheckGroundedStatus()
+    {
+        Vector3 rayStart = groundCheck.position;
+        Vector3 rayDirection = Vector3.down;
+        float rayLength = 1f; // 適宜調整
+        RaycastHit hit;
+
+        isGrounded = Physics.Raycast(rayStart, rayDirection, out hit, rayLength, whatIsGround);
+
+        // デバッグ用にレイをシーンに表示
+        Debug.DrawRay(rayStart, rayDirection * rayLength, isGrounded ? Color.green : Color.red);
+    }
     // 状態を変更するメソッド
     public void ChangeState(IState newState)
     {

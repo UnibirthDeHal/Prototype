@@ -20,13 +20,24 @@ public class State_Player_Fall : IState
     }
 
     public void Execute()
+
     {
-        // 落下中の処理
-        // ここでは、物理的な落下処理はRigidbodyによって自動的に行われます。
-        // 地面に触れたかどうかのチェックは省略しています。
-        // 通常は、地面に接触しているかどうかをPhysics.Raycastや
-        // Physics.CheckSphereなどを使って確認し、接触していれば状態を変更します。
+        float horizontalInput = Input.GetAxis("Horizontal");
+        Vector3 horizontalMove = horizontalInput * player.moveSpeed * Time.deltaTime * Vector3.right;
+        player.transform.position += horizontalMove;
+        // 地面との衝突判定
+        RaycastHit hit;
+        // レイキャストをplayerの位置から下方向に放出し、地面との接触を確認
+        if (Physics.Raycast(player.transform.position, Vector3.down, out hit, 1f, player.whatIsGround))
+        {
+            // 地面に接触した場合、Idle状態へ遷移
+            if (hit.collider != null)
+            {
+                player.ChangeState(new Player_State_Idle(player));
+            }
+        }
     }
+
 
     public void Exit()
     {
