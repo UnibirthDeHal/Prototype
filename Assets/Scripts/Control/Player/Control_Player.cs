@@ -13,28 +13,26 @@ public class ControlPlayer : MonoBehaviour
     public Animator animator;
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-
-    private Rigidbody rb;
-    private bool isGrounded;
-
-    
     public Transform groundCheck;
     public float groundCheckRadius = 0.5f;
     public LayerMask whatIsGround;
-    [HideInInspector] public int dir;                           // 向き（2上 4左 8下 6右）
 
-    //（!）Stateに関する変数はStateのScriptで管理しないように
-    //【State】移動（Move）
-    public float move_speed;                                    // 移動速度
-    [HideInInspector] public float timer_noInput;           // （timer）入力していない時間
-    [HideInInspector] public float threshold_noInput;    // 入力していない時間の閾値(しきいち)
+    [HideInInspector] public int dir;
+
+    public float move_speed;
+    [HideInInspector] public float timer_noInput;
+    [HideInInspector] public float threshold_noInput;
+
+    // Rigidbodyの定義を修正
+    private Rigidbody rb;
+
     private IState currentState;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>(); // Rigidbody for 3D
+        rb = GetComponent<Rigidbody>(); // Rigidbodyコンポーネントの取得
     }
 
     void Start()
@@ -46,22 +44,11 @@ public class ControlPlayer : MonoBehaviour
     {
         currentState?.Execute();
 
-        // Ground check for 3D
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, whatIsGround);
-
-        // 地面にいるときのみジャンプを許可する
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        // 地面にいるかどうかのチェックは、各ステート内で実施
+        // ジャンプ入力を検出
+        if (Input.GetButtonDown("Jump"))
         {
-            Jump();
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Item"))
-        {
-            // Itemとの接触時の処理をここに記述
-            Destroy(other.gameObject); // 例: Itemを消去する
+            ChangeState(new Player_State_Jump(this));
         }
     }
 
@@ -83,33 +70,43 @@ public class ControlPlayer : MonoBehaviour
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
     }
 
-    private void Jump()
+    void OnTriggerEnter(Collider other)
     {
-        // 垂直方向の力を加えてジャンプする
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-        // ジャンプアニメーションを設定する（アニメーションがある場合）
-        SetAnimation("Jump");
-
-        // ジャンプしたので、地面から離れたと見なす
-        isGrounded = false;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        // 地面に触れているかを確認する
-        if (collision.gameObject.CompareTag("Ground"))
+        if (other.CompareTag("Item"))
         {
-            isGrounded = true;
+            // Itemとの接触時の処理をここに記述
+            Destroy(other.gameObject); // 例: Itemを消去する
         }
     }
 
-    void OnCollisionExit(Collision collision)
-    {
-        // 地面から離れたことを検出する
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+   
+   //private void Jump()
+   //{
+   //    // 垂直方向の力を加えてジャンプする
+   //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+   //
+   //    // ジャンプアニメーションを設定する（アニメーションがある場合）
+   //    SetAnimation("Jump");
+   //
+   //    // ジャンプしたので、地面から離れたと見なす
+   //    isGrounded = false;
+   //}
+   //
+   //void OnCollisionEnter(Collision collision)
+   //{
+   //    // 地面に触れているかを確認する
+   //    if (collision.gameObject.CompareTag("Ground"))
+   //    {
+   //        isGrounded = true;
+   //    }
+   //}
+   //
+   //void OnCollisionExit(Collision collision)
+   //{
+   //    // 地面から離れたことを検出する
+   //    if (collision.gameObject.CompareTag("Ground"))
+   //    {
+   //        isGrounded = false;
+   //    }
+   //}
 }
