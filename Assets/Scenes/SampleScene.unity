@@ -4596,16 +4596,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6568208501059080648, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
+      propertyPath: jumpForce
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568208501059080648, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 750394909}
     - target: {fileID: 6568208501059080648, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: groundCheckRadius
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6568208501059080648, guid: 237221422ea8b9b4bb89821adcdc331b, type: 3}
       propertyPath: whatIsGround.m_Bits
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
