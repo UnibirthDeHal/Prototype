@@ -29,7 +29,6 @@ public class ControlPlayer : MonoBehaviour
     private Transform _transform;
     // このフラグはプレイヤーが地面にいるかどうかを追跡します
     internal bool isGrounded;
-   
 
     private void Awake()
     {
@@ -44,7 +43,6 @@ public class ControlPlayer : MonoBehaviour
         ChangeState(new Player_State_Idle(this));
     }
 
-
     void Update()
     {
         currentState?.Execute();
@@ -58,16 +56,6 @@ public class ControlPlayer : MonoBehaviour
             ChangeState(new Player_State_Jump(this));
         }
 
-        //// 移動入力の検出（水平軸が0でない場合）
-        //else if (Input.GetAxisRaw("Horizontal") != 0)
-        //{
-        //    ChangeState(new Player_State_Move(this));
-        //}
-        //// 何も入力がない場合
-        //else if (Input.GetAxisRaw("Horizontal") == 0 && isGrounded)
-        //{
-        //    ChangeState(new Player_State_Idle(this));
-        //}
     }
 
     void CheckGroundedStatus()
@@ -82,6 +70,7 @@ public class ControlPlayer : MonoBehaviour
         // デバッグ用にレイをシーンに表示
         Debug.DrawRay(rayStart, rayDirection * rayLength, isGrounded ? Color.green : Color.red);
     }
+
     // 状態を変更するメソッド
     public void ChangeState(IState newState)
     {
@@ -109,7 +98,4 @@ public class ControlPlayer : MonoBehaviour
             Destroy(other.gameObject); // 例: Itemを消去する
         }
     }
-
-   
-  
 }

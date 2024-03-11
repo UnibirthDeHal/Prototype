@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -15,7 +16,7 @@ public class Player_State_Move : IState
 
     public void Enter()
     {
-        //Debug.Log("移動状態に入った");
+        Debug.Log("移動状態に入った");
         player.SetAnimation("Move");
         player.timer_noInput = 0;                // timer reset
     }
@@ -45,7 +46,6 @@ public class Player_State_Move : IState
             player.ChangeState(new Player_State_Idle(player));
         }
     
-
         // //【状態遷移】Idle状態に（入力していない時間が閾値を超えると）
         if (player.timer_noInput > player.threshold_noInput)
         {

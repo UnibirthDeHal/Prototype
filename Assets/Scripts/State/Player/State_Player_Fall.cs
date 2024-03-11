@@ -5,16 +5,15 @@ using UnityEngine;
 public class State_Player_Fall : IState
 {
     private ControlPlayer player;
-    private Rigidbody rb;
 
     public State_Player_Fall(ControlPlayer player)
     {
         this.player = player;
-        this.rb = player.GetComponent<Rigidbody>();
     }
 
     public void Enter()
     {
+        Debug.Log("落下状態に入った");
         // 落下状態に入る時の処理
         player.SetAnimation("Fall"); // 例えば落下アニメーションの再生
     }
@@ -37,7 +36,6 @@ public class State_Player_Fall : IState
             }
         }
     }
-
 
     public void Exit()
     {

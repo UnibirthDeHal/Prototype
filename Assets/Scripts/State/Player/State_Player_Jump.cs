@@ -13,6 +13,7 @@ public class Player_State_Jump : IState
 
     public void Enter()
     {
+        Debug.Log("ƒWƒƒƒ“ƒvó‘Ô‚É“ü‚Á‚½");
         rb.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
         player.isGrounded = false;
     }
@@ -29,7 +30,6 @@ public class Player_State_Jump : IState
         }
         else if (rb.velocity.y < 0)
         {
-            Debug.Log("Player is falling.");
             player.ChangeState(new State_Player_Fall(player));
             return;
         }
