@@ -25,8 +25,10 @@ public class ControlPlayer : MonoBehaviour
 
     // Rigidbodyの定義を修正
     private Rigidbody rb;
-
     private IState currentState;
+    private Transform _transform;
+    // このフラグはプレイヤーが地面にいるかどうかを追跡します
+    internal bool isGrounded;
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class ControlPlayer : MonoBehaviour
 
     void Start()
     {
+        _transform = transform;
         ChangeState(new Player_State_Idle(this));
     }
 
@@ -44,19 +47,36 @@ public class ControlPlayer : MonoBehaviour
     {
         currentState?.Execute();
 
-        // 地面にいるかどうかのチェックは、各ステート内で実施
-        // ジャンプ入力を検出
-        if (Input.GetButtonDown("Jump"))
+        CheckGroundedStatus();
+
+        // ジャンプ入力の検出
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
+
         {
             ChangeState(new Player_State_Jump(this));
         }
+
     }
 
+    void CheckGroundedStatus()
+    {
+        Vector3 rayStart = groundCheck.position;
+        Vector3 rayDirection = Vector3.down;
+        float rayLength = 1f; // 適宜調整
+        RaycastHit hit;
+
+        isGrounded = Physics.Raycast(rayStart, rayDirection, out hit, rayLength, whatIsGround);
+
+        // デバッグ用にレイをシーンに表示
+        Debug.DrawRay(rayStart, rayDirection * rayLength, isGrounded ? Color.green : Color.red);
+    }
+
+    // 状態を変更するメソッド
     public void ChangeState(IState newState)
     {
-        currentState?.Exit();
+        currentState?.Exit(); // 現在の状態の Exit を呼び出し
         currentState = newState;
-        currentState.Enter();
+        currentState.Enter(); // 新しい状態の Enter を呼び出し
     }
 
     public void SetAnimation(string animationName)
@@ -78,35 +98,4 @@ public class ControlPlayer : MonoBehaviour
             Destroy(other.gameObject); // 例: Itemを消去する
         }
     }
-
-   
-   //private void Jump()
-   //{
-   //    // 垂直方向の力を加えてジャンプする
-   //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-   //
-   //    // ジャンプアニメーションを設定する（アニメーションがある場合）
-   //    SetAnimation("Jump");
-   //
-   //    // ジャンプしたので、地面から離れたと見なす
-   //    isGrounded = false;
-   //}
-   //
-   //void OnCollisionEnter(Collision collision)
-   //{
-   //    // 地面に触れているかを確認する
-   //    if (collision.gameObject.CompareTag("Ground"))
-   //    {
-   //        isGrounded = true;
-   //    }
-   //}
-   //
-   //void OnCollisionExit(Collision collision)
-   //{
-   //    // 地面から離れたことを検出する
-   //    if (collision.gameObject.CompareTag("Ground"))
-   //    {
-   //        isGrounded = false;
-   //    }
-   //}
 }

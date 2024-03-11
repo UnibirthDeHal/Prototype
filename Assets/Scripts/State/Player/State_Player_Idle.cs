@@ -14,6 +14,7 @@ public class Player_State_Idle : IState
 
     public void Enter()
     {
+        Debug.Log("待機状態に入った");
         player.SetAnimation("Idle");
     }
 
@@ -25,7 +26,10 @@ public class Player_State_Idle : IState
         {
             player.ChangeState(new Player_State_Move(player));
         }
-
+        if (Input.GetButtonDown("Jump"))     
+        {
+            player.ChangeState(new Player_State_Jump(player));
+        }
     }
 
     public void Exit()
