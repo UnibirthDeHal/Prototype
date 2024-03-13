@@ -17,7 +17,7 @@ public class Head_State_Idle : IState
         //変異状況管理から頭の変異状況を取得
         //Switchで変異状況によってアニメーションをセット
         //例：Debug.Log("竜頭待機")
-        //    Head.SetAnimation("Head(1)Idle")
+        //    Head.SetAnimation("Head(1)Idle");
         Debug.Log("人頭待機");
         Head.SetAnimation("Head(0)Idle");
     }

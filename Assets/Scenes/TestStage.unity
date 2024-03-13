@@ -256,6 +256,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 56186369364076705, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1372814107854969867, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
       propertyPath: spriteRenderer
       value: 

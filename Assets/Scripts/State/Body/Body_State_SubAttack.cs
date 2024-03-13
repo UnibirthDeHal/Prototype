@@ -22,7 +22,7 @@ public class Body_State_SubAttack : IState
     {
         //SubAttackアニメーションが終わったら
         //【状態遷移】Idle状態に
-        //Head.ChangeState(new Body_State_Idle(Body));
+        //Body.ChangeState(new Body_State_Idle(Body));
     }
 
     public void Exit()

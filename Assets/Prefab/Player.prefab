@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 8280294751983375666}
   - component: {fileID: 1447674022790147333}
   - component: {fileID: 3154809467902613404}
+  - component: {fileID: 56186369364076705}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -248,6 +249,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &56186369364076705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193330918089801275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a5e92449f5e3b4ba080914b5361024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1447674022790147333}
+  animator: {fileID: 3154809467902613404}
 --- !u!1 &5296425036720972818
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +516,7 @@ GameObject:
   - component: {fileID: 7544679170777965031}
   - component: {fileID: 7240105513369936074}
   - component: {fileID: 6320857487250861175}
+  - component: {fileID: 4361386765455633254}
   m_Layer: 0
   m_Name: Leg2
   m_TagString: Untagged
@@ -596,3 +612,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4361386765455633254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146976921099833463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e9abcd718d6684eb5277569efd711f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7240105513369936074}
+  animator: {fileID: 6320857487250861175}
