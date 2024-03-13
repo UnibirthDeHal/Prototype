@@ -29,6 +29,7 @@ public class ControlHand : MonoBehaviour
     {
         // 現在のステート
         currentState?.Execute();
+
     }
 
     public void ChangeState(IState newState)

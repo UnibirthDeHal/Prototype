@@ -51,11 +51,21 @@ public class ControlPlayer : MonoBehaviour
 
         // ジャンプ入力の検出
         if (Input.GetKey(KeyCode.Space) && isGrounded)
-
         {
             ChangeState(new Player_State_Jump(this));
         }
 
+        // 攻撃入力の検出（左クリック）
+        //メインアタック
+        if (Input.GetKey(KeyCode.F))
+        {
+            ChangeState(new State_Player_Attack(this));
+        }
+        //サブアタック
+        if (Input.GetKey(KeyCode.R))
+        {
+            ChangeState(new State_Player_SubAttack(this));
+        }
     }
 
     void CheckGroundedStatus()

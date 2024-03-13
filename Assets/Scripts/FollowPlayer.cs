@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    //ターゲット(Player)
     [SerializeField] public Transform Player;
-    //カメラとの距離
     Vector3 distance;
-    Vector3 distanceR;      //Playerが右向き
-    Vector3 distanceL;      //Playerが左向き
-    //目標値に到達するまでのおおよその時間[s]
     [SerializeField] public float SmoothTime = 0.3f;
-    // 現在速度(SmoothDampの計算のために必要)
     Vector3 Velocity = Vector3.zero;
 
     void Start()
     {
+        // プレイヤーとカメラの初期距離を保持
         distance = transform.position - Player.transform.position;
     }
-    void Update()
-    {
-        //目標位置取得
-        Vector3 TargetPos = Player.transform.position + distance;
 
-        //目的地に向かって時間の経過とともに徐々にベクトルを変化させます
-        transform.position = Vector3.SmoothDamp(transform.position, TargetPos, ref Velocity, SmoothTime);
+    void LateUpdate()
+    {
+        // 目標位置をプレイヤーの位置に基づいて計算（水平方向は即時反映、垂直方向は遅延を持たせる）
+        Vector3 targetPosition = Player.transform.position + distance;
+
+        // 水平方向のみをSmoothDampで滑らかに追従
+        Vector3 smoothPosition = Vector3.SmoothDamp(transform.position, new Vector3(targetPosition.x, transform.position.y, targetPosition.z), ref Velocity, SmoothTime);
+
+        // 垂直方向の追従に遅延を持たせる
+        smoothPosition.y = Mathf.Lerp(transform.position.y, targetPosition.y, Time.deltaTime * SmoothTime * 10);
+
+        // カメラの位置を更新
+        transform.position = smoothPosition;
     }
 }
