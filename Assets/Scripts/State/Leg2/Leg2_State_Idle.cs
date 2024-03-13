@@ -17,7 +17,7 @@ public class Leg2_State_Idle : IState
         //変異状況管理から尻尾の変異状況を取得
         //Switchで変異状況によってアニメーションをセット
         //例：Debug.Log("竜尻尾待機")
-        //    Head.SetAnimation("Leg2(1)Idle");
+        //    Leg2.SetAnimation("Leg2(1)Idle");
         Debug.Log("人尻尾なし");
         Leg2.SetAnimation("Leg2(0)Idle");
     }
