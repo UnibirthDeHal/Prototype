@@ -19,7 +19,7 @@ public class Leg1_State_Idle : IState
         //例：Debug.Log("竜足待機")
         //    Leg1.SetAnimation("Leg1(1)Idle");
         Debug.Log("人足待機");
-        Leg1.SetAnimation("Leg1(1)Idle");
+        Leg1.SetAnimation("Leg1(0)Idle");
     }
 
     public void Execute()
