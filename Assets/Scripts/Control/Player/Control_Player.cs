@@ -102,9 +102,36 @@ public class ControlPlayer : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Item"))
+        if (other.CompareTag("竜遺伝子"))
         {
             // Itemとの接触時の処理をここに記述
+
+            //ここに竜遺伝子を吸収したことを変異状況管理へ報告
+
+            Destroy(other.gameObject); // 例: Itemを消去する
+        }
+        if (other.CompareTag("魚遺伝子"))
+        {
+            // Itemとの接触時の処理をここに記述
+
+            //ここに魚遺伝子を吸収したことを変異状況管理へ報告
+
+            Destroy(other.gameObject); // 例: Itemを消去する
+        }
+        if (other.CompareTag("ネズミ遺伝子"))
+        {
+            // Itemとの接触時の処理をここに記述
+
+            //ここにネズミ遺伝子を吸収したことを変異状況管理へ報告
+
+            Destroy(other.gameObject); // 例: Itemを消去する
+        }
+        if (other.CompareTag("亀遺伝子"))
+        {
+            // Itemとの接触時の処理をここに記述
+
+            //ここに亀遺伝子を吸収したことを変異状況管理へ報告
+
             Destroy(other.gameObject); // 例: Itemを消去する
         }
     }

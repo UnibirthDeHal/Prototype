@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ground
   - Ground
-  - item
-  - Item
   - Enemy
+  - "\u7ADC\u907A\u4F1D\u5B50"
+  - "\u9B5A\u907A\u4F1D\u5B50"
+  - "\u30CD\u30BA\u30DF\u907A\u4F1D\u5B50"
+  - "\u4E80\u907A\u4F1D\u5B50"
   layers:
   - Default
   - TransparentFX
