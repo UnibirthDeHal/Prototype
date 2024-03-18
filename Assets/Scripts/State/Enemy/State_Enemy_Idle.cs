@@ -15,21 +15,17 @@ public class State_Enemy_Idle : IState
     public void Enter()
     {
         // Idle 状態に入ったときの初期化などを行う
+        enemy.idletimer = 0;
     }
 
     public void Execute()
     {
-        // プレイヤーの位置を取得
-        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        Vector3 playerPosition = playerTransform.position;
+        enemy.idletimer += Time.deltaTime;
 
-        // エネミーとプレイヤーの距離を計算
-        float distanceToPlayer = Vector3.Distance(enemy.transform.position, playerPosition);
-
-        // 一定範囲以下になった場合、Chase 状態に遷移
-        if (distanceToPlayer < 5f) // 5fは適切な範囲の例です
+        // 一定範時間後Move状態に入る
+        if (enemy.idletimer > enemy.endidletime)
         {
-            enemy.ChangeState(new State_Enemy_Chase(enemy));
+            enemy.ChangeState(new State_Enemy_Move(enemy));
         }
 
         // Idle 状態で毎フレーム実行される処理
