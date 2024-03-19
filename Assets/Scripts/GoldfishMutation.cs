@@ -12,7 +12,7 @@ public enum MutationState
     Break
 }
 
-public class MutationStateMachine : MonoBehaviour
+public class GoldfishMutationStateMachine : MonoBehaviour
 {
     private MutationState currentState = MutationState.Bad;
 
@@ -67,7 +67,7 @@ public class MutationStateMachine : MonoBehaviour
 
 public class GoldfishMutation : MonoBehaviour
 {
-        public MutationStateMachine mutationStateMachine;
+        public MutationState mutationStateMachine;
 
     public void ApplyGoodMutation()
     {
