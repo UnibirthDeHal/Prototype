@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_Player_SubAttack : IState
 {
-    private ControlPlayer player;
+    private Control_Player player;
     private Animator animator;
     private Rigidbody rb;
 
@@ -11,7 +11,7 @@ public class State_Player_SubAttack : IState
     public LayerMask enemyLayers;
     public int attackDamage = 10;
 
-    public State_Player_SubAttack(ControlPlayer player)
+    public State_Player_SubAttack(Control_Player player)
     {
         this.player = player;
         this.rb = player.GetComponent<Rigidbody>();

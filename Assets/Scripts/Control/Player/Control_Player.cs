@@ -1,17 +1,32 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class ControlPlayer : MonoBehaviour
+public class Control_Player : MonoBehaviour
 {
+    //player基礎属性管理
+    [HideInInspector] public float moveSpeed;              //移動速度
+    [HideInInspector] public float hp_max;                 //最大HP
+    [HideInInspector] public float hp_cur;                 //現在HP
+
+    //player各部位状態
+    public UI_State_Head ui_head;
+    [HideInInspector] public string state_head;
+
+    [Space, Header("[UIに関する]")]
+    public HPSlider slider_hp;                             //HPバー
+    public GameObject slider_burden;                       //重量バー
+
+    [Space]
     public SpriteRenderer spriteRenderer;
     public Animator animator;
-    public float moveSpeed = 5f;
+
     public float jumpForce = 7f;
     public Transform groundCheck;
     public float groundCheckRadius = 0.5f;
@@ -19,7 +34,7 @@ public class ControlPlayer : MonoBehaviour
 
     [HideInInspector] public int dir;
 
-    public float move_speed;
+    //public float move_speed;
     [HideInInspector] public float timer_noInput;
     [HideInInspector] public float threshold_noInput;
 
@@ -41,10 +56,16 @@ public class ControlPlayer : MonoBehaviour
     {
         _transform = transform;
         ChangeState(new Player_State_Idle(this));
+
+        //初期化
+        moveSpeed = 5.0f;
+        hp_max = 125;
+        hp_cur = hp_max;
     }
 
     void Update()
     {
+
         currentState?.Execute();
 
         CheckGroundedStatus();
@@ -105,6 +126,10 @@ public class ControlPlayer : MonoBehaviour
         if (other.CompareTag("竜遺伝子"))
         {
             // Itemとの接触時の処理をここに記述
+            if (ui_head)
+            {
+                ui_head.ChangePart("Dragon");
+            }
 
             //ここに竜遺伝子を吸収したことを変異状況管理へ報告
 
@@ -113,13 +138,18 @@ public class ControlPlayer : MonoBehaviour
         if (other.CompareTag("魚遺伝子"))
         {
             // Itemとの接触時の処理をここに記述
-
+            if (ui_head)
+            {
+                ui_head.ChangePart("Fish");
+            }
             //ここに魚遺伝子を吸収したことを変異状況管理へ報告
 
             Destroy(other.gameObject); // 例: Itemを消去する
         }
         if (other.CompareTag("ネズミ遺伝子"))
         {
+            moveSpeed += 1.0f;
+            Debug.Log("ネズミ遺伝子ゲット、Speed Up" + 1.0f);
             // Itemとの接触時の処理をここに記述
 
             //ここにネズミ遺伝子を吸収したことを変異状況管理へ報告
@@ -128,6 +158,13 @@ public class ControlPlayer : MonoBehaviour
         }
         if (other.CompareTag("亀遺伝子"))
         {
+            hp_max += 25f;
+            if (slider_hp != null)
+            {
+                Debug.Log("更新");
+                slider_hp.RefreshHealth();
+            }
+            Debug.Log("亀遺伝子ゲット、Hp Max Up" + 25.0f);
             // Itemとの接触時の処理をここに記述
 
             //ここに亀遺伝子を吸収したことを変異状況管理へ報告

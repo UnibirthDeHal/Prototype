@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Player_State_Jump : IState
 {
-    private ControlPlayer player;
+    private Control_Player player;
     private Rigidbody rb;
 
-    public Player_State_Jump(ControlPlayer player)
+    public Player_State_Jump(Control_Player player)
     {
         this.player = player;
         this.rb = player.GetComponent<Rigidbody>();

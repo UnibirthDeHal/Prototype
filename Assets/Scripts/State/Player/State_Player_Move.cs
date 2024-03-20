@@ -7,16 +7,16 @@ using UnityEngine;
 public class Player_State_Move : IState
 {
 
-    private ControlPlayer player;
+    private Control_Player player;
 
-    public Player_State_Move(ControlPlayer player)
+    public Player_State_Move(Control_Player player)
     {
         this.player = player;
     }
 
     public void Enter()
     {
-        Debug.Log("移動状態に入った");
+        //Debug.Log("移動状態に入った");
         player.SetAnimation("Move");
         player.timer_noInput = 0;                // timer reset
     }
@@ -39,7 +39,7 @@ public class Player_State_Move : IState
         }
 
         // 座標移動計算
-        player.transform.position += new Vector3(move_input, 0, 0) * player.move_speed * Time.deltaTime;
+        player.transform.position += new Vector3(move_input, 0, 0) * player.moveSpeed * Time.deltaTime;
 
         if (Input.GetAxisRaw("Horizontal") == 0)
         {

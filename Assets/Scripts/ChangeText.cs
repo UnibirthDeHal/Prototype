@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ChangeText : MonoBehaviour
 {
+    Control_Player player;
     public Text cangeText;
     // Start is called before the first frame update
     void Start()

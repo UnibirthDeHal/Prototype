@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class State_Player_Fall : IState
 {
-    private ControlPlayer player;
+    private Control_Player player;
 
-    public State_Player_Fall(ControlPlayer player)
+    public State_Player_Fall(Control_Player player)
     {
         this.player = player;
     }
