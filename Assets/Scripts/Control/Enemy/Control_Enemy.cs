@@ -10,24 +10,20 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Control_Enemy : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
-    //public Animator animator;
-    public float moveSpeed = 3f;
-    public float jumpForce = 5f;
-
+    public float moveSpeed;
     private Rigidbody rb;
-    private bool isGrounded;
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.5f;
-    public LayerMask whatIsGround;
-    [HideInInspector] public int dir;
-
-    public float move_speed;                                    // 移動速度
     private IState currentState;
+
+    [HideInInspector] public float idletimer;
+    public float endidletime;
+
+    public int Hp = 2;
+    [Header("ドロップ遺伝子")][SerializeField] GameObject DorpItem;
+    [Header("移動範囲")]public float moverange;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>(); // Rigidbody for 3D
     }
 
@@ -41,24 +37,23 @@ public class Control_Enemy : MonoBehaviour
     void Update()
     {
         currentState?.Execute();
+
+        isDead();
     }
-
-    //public void ChangeState(IState newState)
-    //{
-    //    currentState?.Exit();
-    //    currentState = newState;
-    //    currentState.Enter();
-    //}
-
-    //internal void ChangeState(State_Enemy_Chase state_Enemy_Chase)
-    //{
-    //    throw new NotImplementedException();
-    //}
 
     public void ChangeState(IState newState)
     {
         currentState?.Exit();
         currentState = newState;
         currentState.Enter();
+    }
+
+    void isDead()
+    {
+        if (Hp <= 0)
+        {
+            Instantiate(DorpItem,this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
     }
 }
