@@ -7,10 +7,14 @@ using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class ControlLeg2 : MonoBehaviour
+public class Control_Leg2 : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    [Header("[ÉvÉåÉCÉÑÅ[]")]
+    public Control_Player player;
+
+    [Space]
+    [HideInInspector]public SpriteRenderer spriteRenderer;
+    [HideInInspector]public Animator animator;
 
     private IState currentState;
 
@@ -22,7 +26,7 @@ public class ControlLeg2 : MonoBehaviour
 
     void Start()
     {
-        ChangeState(new Leg2_State_Idle(this));
+        ChangeState(new Leg2_Human_Idle(this));
     }
 
     void Update()

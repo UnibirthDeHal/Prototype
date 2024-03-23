@@ -22,10 +22,10 @@ public class Player_State_Idle : IState
     {
 
         //【状態遷移】Move状態に
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            player.ChangeState(new Player_State_Move(player));
-        }
+        //if (Input.GetAxisRaw("Horizontal") != 0)
+        //{
+        //    player.ChangeState(new Player_State_Move(player));
+        //}
 
 
         if (Input.GetButtonDown("Jump"))     

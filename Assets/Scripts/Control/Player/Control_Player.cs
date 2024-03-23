@@ -11,17 +11,17 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Control_Player : MonoBehaviour
 {
     //player基礎属性管理
-    [HideInInspector] public float moveSpeed;              //移動速度
+    public float moveSpeed;              //移動速度
     [HideInInspector] public float hp_max;                 //最大HP
     [HideInInspector] public float hp_cur;                 //現在HP
 
     //各部位
     [Header("[プレイヤーの各部位]")]
-    public GameObject part_head;
-    public GameObject part_hands;
-    public GameObject part_body;
-    public GameObject part_leg1;
-    public GameObject part_leg2;
+    public Control_Head part_head;
+    public Control_Hand part_hands;
+    public Control_Body part_body;
+    public Control_Leg1 part_leg1;
+    public Control_Leg2 part_leg2;
 
     //player各部位状態
     public UI_State_Head ui_head;
@@ -32,8 +32,8 @@ public class Control_Player : MonoBehaviour
     public GameObject slider_burden;                       //重量バー
 
     [Space]
-    [HideInInspector]public SpriteRenderer spriteRenderer;
-    [HideInInspector]public Animator animator;
+    [HideInInspector] public SpriteRenderer spriteRenderer;
+    [HideInInspector] public Animator animator;
 
     public float jumpForce = 7f;
     public Transform groundCheck;
@@ -66,9 +66,10 @@ public class Control_Player : MonoBehaviour
         ChangeState(new Player_State_Idle(this));
 
         //初期化
-        moveSpeed = 5.0f;
+        //moveSpeed = 5.0f;
         hp_max = 125;
         hp_cur = hp_max;
+        dir = 6;
     }
 
     void Update()
@@ -181,6 +182,40 @@ public class Control_Player : MonoBehaviour
             //ここに亀遺伝子を吸収したことを変異状況管理へ報告
 
             Destroy(other.gameObject); // 例: Itemを消去する
+        }
+    }
+
+    public void SetSpriteFlip(bool flip)
+    {
+        if (flip == true)
+        {
+            if (part_head && part_hands && part_body && part_leg1&&part_leg2)
+            {
+                part_head.spriteRenderer.flipX = true;
+                part_hands.spriteRenderer.flipX = true;
+                part_body.spriteRenderer.flipX = true;
+                part_leg1.spriteRenderer.flipX = true;
+                part_leg2.spriteRenderer.flipX = true;
+            }
+            else
+            {
+                Debug.Log("各部位がちゃん設置されていない！");
+            }
+        }
+        else if (flip == false)
+        {
+            if (part_head && part_hands && part_body && part_leg1 && part_leg2)
+            {
+                part_head.spriteRenderer.flipX = false;
+                part_hands.spriteRenderer.flipX = false;
+                part_body.spriteRenderer.flipX = false;
+                part_leg1.spriteRenderer.flipX = false;
+                part_leg2.spriteRenderer.flipX = false;
+            }
+            else
+            {
+                Debug.Log("各部位がちゃん設置されていない！");
+            }
         }
     }
 }

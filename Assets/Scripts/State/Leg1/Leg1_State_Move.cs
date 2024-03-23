@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Leg1_State_Move : IState
 {
-    private ControlLeg1 Leg1;
+    private Control_Leg1 Leg1;
 
-    public Leg1_State_Move(ControlLeg1 Leg1)
+    public Leg1_State_Move(Control_Leg1 Leg1)
     {
         this.Leg1 = Leg1;
     }

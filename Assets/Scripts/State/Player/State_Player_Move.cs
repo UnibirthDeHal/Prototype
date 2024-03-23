@@ -38,6 +38,11 @@ public class Player_State_Move : IState
             player.spriteRenderer.flipX = true;
         }
 
+        if (move_input == 0)
+        {
+            
+        }
+
         // 座標移動計算
         player.transform.position += new Vector3(move_input, 0, 0) * player.moveSpeed * Time.deltaTime;
 

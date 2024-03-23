@@ -14,7 +14,7 @@ public class Control_Head : MonoBehaviour
 
     [Space]
     [HideInInspector]public SpriteRenderer spriteRenderer;
-    [HideInInspector] public Animator animator;      
+    [HideInInspector]public Animator animator;      
 
     private IState currentState;
 

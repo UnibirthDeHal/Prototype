@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Leg2_State_Idle : IState
 {
-    private ControlLeg2 Leg2;
+    private Control_Leg2 Leg2;
 
-    public Leg2_State_Idle(ControlLeg2 Leg2)
+    public Leg2_State_Idle(Control_Leg2 Leg2)
     {
         this.Leg2 = Leg2;
     }

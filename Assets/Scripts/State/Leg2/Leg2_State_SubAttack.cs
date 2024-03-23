@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Leg2_State_SubAttack : IState
 {
-    private ControlLeg2 Leg2;
+    private Control_Leg2 Leg2;
 
-    public Leg2_State_SubAttack(ControlLeg2 Leg2)
+    public Leg2_State_SubAttack(Control_Leg2 Leg2)
     {
         this.Leg2 = Leg2;
     }
