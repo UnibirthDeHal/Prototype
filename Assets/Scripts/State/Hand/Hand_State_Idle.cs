@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Hand_State_Idle : IState
 {
-    private ControlHand Hand;
+    private Control_Hand Hand;
 
-    public Hand_State_Idle(ControlHand Hand)
+    public Hand_State_Idle(Control_Hand Hand)
     {
         this.Hand = Hand;
     }

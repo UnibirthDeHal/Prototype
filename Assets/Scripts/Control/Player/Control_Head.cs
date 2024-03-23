@@ -13,8 +13,8 @@ public class Control_Head : MonoBehaviour
     public GameObject player;
 
     [Space]
-    public SpriteRenderer spriteRenderer;
-    public Animator animator;      
+    [HideInInspector]public SpriteRenderer spriteRenderer;
+    [HideInInspector] public Animator animator;      
 
     private IState currentState;
 
@@ -53,5 +53,4 @@ public class Control_Head : MonoBehaviour
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
     }
 
-   
 }

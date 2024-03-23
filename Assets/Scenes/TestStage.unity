@@ -383,9 +383,29 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 87526257}
+    - target: {fileID: 1447674022790147333, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 88e38ba019846cd418dbe3bff184644e, type: 3}
     - target: {fileID: 2227418487422723539, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097057690956028278, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: m_Size.x
+      value: 7.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097057690956028278, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: m_Size.y
+      value: 7.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097057690956028278, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6862b485a5e0e6142bc6b9b1430b18ff, type: 3}
+    - target: {fileID: 3097057690956028278, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3485577581837159914, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
       propertyPath: player
@@ -419,6 +439,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5890699672402896579, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3ffc916127c605b4f942e5fb512ba53a, type: 3}
     - target: {fileID: 6421030385013819735, guid: 177838dbd92561b48a0ecdb497ad9840, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.4

@@ -20,7 +20,7 @@ public class Head_Human_Idle : IState
 
     public void Execute()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             head.ChangeState(new Head_Dragon_Idle(head));   
         }

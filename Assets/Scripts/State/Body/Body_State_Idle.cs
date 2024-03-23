@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Body_State_Idle : IState
 {
-    private ControlBody Body;
+    private Control_Body Body;
 
-    public Body_State_Idle(ControlBody Body)
+    public Body_State_Idle(Control_Body Body)
     {
         this.Body = Body;
     }

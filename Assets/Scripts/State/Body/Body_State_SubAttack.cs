@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Body_State_SubAttack : IState
 {
-    private ControlBody Body;
+    private Control_Body Body;
 
-    public Body_State_SubAttack(ControlBody Body)
+    public Body_State_SubAttack(Control_Body Body)
     {
         this.Body = Body;
     }
