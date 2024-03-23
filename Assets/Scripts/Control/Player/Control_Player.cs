@@ -15,6 +15,14 @@ public class Control_Player : MonoBehaviour
     [HideInInspector] public float hp_max;                 //最大HP
     [HideInInspector] public float hp_cur;                 //現在HP
 
+    //各部位
+    [Header("[プレイヤーの各部位]")]
+    public GameObject part_head;
+    public GameObject part_hands;
+    public GameObject part_body;
+    public GameObject part_leg1;
+    public GameObject part_leg2;
+
     //player各部位状態
     public UI_State_Head ui_head;
     [HideInInspector] public string state_head;
@@ -24,8 +32,8 @@ public class Control_Player : MonoBehaviour
     public GameObject slider_burden;                       //重量バー
 
     [Space]
-    public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    [HideInInspector]public SpriteRenderer spriteRenderer;
+    [HideInInspector]public Animator animator;
 
     public float jumpForce = 7f;
     public Transform groundCheck;
@@ -112,7 +120,10 @@ public class Control_Player : MonoBehaviour
 
     public void SetAnimation(string animationName)
     {
-        animator.Play(animationName);
+        if (animator)
+        {
+            animator.Play(animationName);
+        }
     }
 
     public bool AnimationFinished(string animationName)

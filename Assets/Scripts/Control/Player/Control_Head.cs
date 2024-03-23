@@ -7,10 +7,14 @@ using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class ControlHead : MonoBehaviour
+public class Control_Head : MonoBehaviour
 {
+    [Header("[ƒvƒŒƒCƒ„[]")]
+    public GameObject player;
+
+    [Space]
     public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    public Animator animator;      
 
     private IState currentState;
 
@@ -22,7 +26,7 @@ public class ControlHead : MonoBehaviour
 
     void Start()
     {
-        ChangeState(new Head_State_Idle(this));
+        ChangeState(new Head_Human_Idle(this));
     }
 
     void Update()
@@ -49,4 +53,5 @@ public class ControlHead : MonoBehaviour
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
     }
 
+   
 }

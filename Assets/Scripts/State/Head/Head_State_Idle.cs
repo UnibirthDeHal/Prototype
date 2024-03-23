@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Head_State_Idle : IState
 {
-    private ControlHead Head;
+    private Control_Head Head;
 
-    public Head_State_Idle(ControlHead Head)
+    public Head_State_Idle(Control_Head Head)
     {
         this.Head = Head;
     }
