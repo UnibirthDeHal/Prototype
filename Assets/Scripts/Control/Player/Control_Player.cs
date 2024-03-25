@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
+using Random = UnityEngine.Random;
 
 public class Control_Player : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class Control_Player : MonoBehaviour
     public LayerMask whatIsGround;
 
     [HideInInspector] public int dir;
+    [HideInInspector] private int random;
 
     //public float move_speed;
     [HideInInspector] public float timer_noInput;
@@ -72,6 +74,7 @@ public class Control_Player : MonoBehaviour
         hp_max = 125;
         hp_cur = hp_max;
         dir = 6;
+        random = 0;
         isjump = false;
         isfall = false;
     }
@@ -134,9 +137,76 @@ public class Control_Player : MonoBehaviour
         if (other.CompareTag("竜遺伝子"))
         {
             // Itemとの接触時の処理をここに記述
-            if (ui_head)
+            for (;;)
             {
-                ui_head.ChangePart("Dragon");
+                if ((part_head.nowstate == 1) && (part_hands.nowstate == 1) && (part_body.nowstate == 1) && (part_leg1.nowstate == 1) && (part_leg2.nowstate == 1))
+                {
+                    Debug.Log("全身竜!!");
+                    break;
+                }
+
+                random = Random.Range(1, 6);
+
+                if (random == 1)
+                {
+                    if (part_head.nowstate != 1)
+                    {
+                        part_head.nowstate = 1;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (random == 2)
+                {
+                    if (part_hands.nowstate != 1)
+                    {
+                        part_hands.nowstate = 1;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (random == 3)
+                {
+                    if (part_body.nowstate != 1)
+                    {
+                        part_body.nowstate = 1;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (random == 4)
+                {
+                    if (part_leg1.nowstate != 1)
+                    {
+                        part_leg1.nowstate = 1;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (random == 5)
+                {
+                    if (part_leg2.nowstate != 1)
+                    {
+                        part_leg2.nowstate = 1;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
             }
 
             //ここに竜遺伝子を吸収したことを変異状況管理へ報告
@@ -146,9 +216,52 @@ public class Control_Player : MonoBehaviour
         if (other.CompareTag("魚遺伝子"))
         {
             // Itemとの接触時の処理をここに記述
-            if (ui_head)
+            for (;;)
             {
-                ui_head.ChangePart("Fish");
+                if ((part_head.nowstate == 2) && (part_body.nowstate == 2) && (part_leg2.nowstate == 2))
+                {
+                    Debug.Log("全身魚!!");
+                    break;
+                }
+
+                random = Random.Range(1, 4);
+
+                if (random == 1)
+                {
+                    if (part_head.nowstate != 2)
+                    {
+                        part_head.nowstate = 2;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (random == 2)
+                {
+                    if (part_body.nowstate != 2)
+                    {
+                        part_body.nowstate = 2;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else if (random == 3)
+                {
+                    if (part_leg2.nowstate != 2)
+                    {
+                        part_leg2.nowstate = 2;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
             }
             //ここに魚遺伝子を吸収したことを変異状況管理へ報告
 
@@ -156,8 +269,8 @@ public class Control_Player : MonoBehaviour
         }
         if (other.CompareTag("ネズミ遺伝子"))
         {
-            moveSpeed += 1.0f;
-            Debug.Log("ネズミ遺伝子ゲット、Speed Up" + 1.0f);
+            moveSpeed += 2.0f;
+            Debug.Log("ネズミ遺伝子ゲット、Speed Up" + 2.0f);
             // Itemとの接触時の処理をここに記述
 
             //ここにネズミ遺伝子を吸収したことを変異状況管理へ報告

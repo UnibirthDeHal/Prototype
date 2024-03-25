@@ -20,9 +20,9 @@ public class DNAReSet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Instantiate(dragon, new Vector3(43.5f, -3.0f, 0.0f), Quaternion.identity);
-        Instantiate(dragon, new Vector3(47.5f, -3.0f, 0.0f), Quaternion.identity);
-        Instantiate(fish, new Vector3(45.5f, -3.0f, 0.0f), Quaternion.identity);
-        Instantiate(fish, new Vector3(49.5f, -3.0f, 0.0f), Quaternion.identity);
+        Instantiate(dragon, new Vector3(-4.5f, 1.0f, 0.0f), Quaternion.identity);
+        Instantiate(dragon, new Vector3(-6.5f, 1.0f, 0.0f), Quaternion.identity);
+        Instantiate(fish, new Vector3(-8.5f, 1.0f, 0.0f), Quaternion.identity);
+        Instantiate(fish, new Vector3(-10.5f, 1.0f, 0.0f), Quaternion.identity);
     }
 }
