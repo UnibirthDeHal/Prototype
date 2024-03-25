@@ -16,14 +16,28 @@ public class Leg2_Fish_SubAttack : IState
     public void Enter()
     {
         leg2.SetAnimation("Fish_SubAttack");
-        leg2.GetComponent<BoxCollider>().enabled = true;
+        leg2.isAttacked = false;
     }
 
     public void Execute()
     {
+        var state = leg2.animator.GetCurrentAnimatorStateInfo(0);
+
+        if (leg2.isAttacked == false)
+        {
+            if (state.normalizedTime >= 0.7f)
+            {
+                leg2.GetComponent<BoxCollider>().enabled = true;
+            }
+
+            if (state.normalizedTime >= 0.9f)
+            {
+                leg2.GetComponent<BoxCollider>().enabled = false;
+            }
+        }
+
         if (leg2.AnimationFinished("Fish_SubAttack"))
         {
-            leg2.GetComponent<BoxCollider>().enabled = false;
             leg2.ChangeState(new Leg2_Fish_Idle(leg2));   
         }
     }

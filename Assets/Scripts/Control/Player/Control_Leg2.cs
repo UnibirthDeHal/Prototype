@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class Control_Leg2 : MonoBehaviour
@@ -18,6 +17,7 @@ public class Control_Leg2 : MonoBehaviour
 
     [HideInInspector]public SpriteRenderer spriteRenderer;
     [HideInInspector]public Animator animator;
+    [HideInInspector]public bool isAttacked;
 
     private IState currentState;
 
@@ -30,6 +30,7 @@ public class Control_Leg2 : MonoBehaviour
     void Start()
     {
         nowstate = 0;
+        isAttacked=false;
         ChangeState(new Leg2_Human_Idle(this));
     }
 
@@ -62,6 +63,8 @@ public class Control_Leg2 : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             collision.gameObject.GetComponent<Control_Enemy>().Hp -= 3;
+            this.GetComponent<BoxCollider>().enabled = false;
+            isAttacked = true;
         }
     }
 }

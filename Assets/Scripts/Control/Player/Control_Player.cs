@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
@@ -340,6 +339,11 @@ public class Control_Player : MonoBehaviour
                 part_body.spriteRenderer.flipX = true;
                 part_leg1.spriteRenderer.flipX = true;
                 part_leg2.spriteRenderer.flipX = true;
+
+                part_head.gameObject.GetComponent<BoxCollider>().center = ColliderFlip(part_head.gameObject.GetComponent<BoxCollider>().center);
+                part_hands.gameObject.GetComponent<BoxCollider>().center = ColliderFlip(part_hands.gameObject.GetComponent<BoxCollider>().center);
+                part_body.gameObject.GetComponent<BoxCollider>().center = ColliderFlip(part_body.gameObject.GetComponent<BoxCollider>().center);
+                part_leg2.gameObject.GetComponent<BoxCollider>().center = ColliderFlip(part_leg2.gameObject.GetComponent<BoxCollider>().center);
             }
             else
             {
@@ -355,6 +359,11 @@ public class Control_Player : MonoBehaviour
                 part_body.spriteRenderer.flipX = false;
                 part_leg1.spriteRenderer.flipX = false;
                 part_leg2.spriteRenderer.flipX = false;
+
+                part_head.gameObject.GetComponent<BoxCollider>().center=ColliderFlip(part_head.gameObject.GetComponent<BoxCollider>().center);
+                part_hands.gameObject.GetComponent<BoxCollider>().center=ColliderFlip(part_hands.gameObject.GetComponent<BoxCollider>().center);
+                part_body.gameObject.GetComponent<BoxCollider>().center=ColliderFlip(part_body.gameObject.GetComponent<BoxCollider>().center);
+                part_leg2.gameObject.GetComponent<BoxCollider>().center=ColliderFlip(part_leg2.gameObject.GetComponent<BoxCollider>().center);
             }
             else
             {
@@ -511,5 +520,13 @@ public class Control_Player : MonoBehaviour
                 image_leg2.BeSelete();
                 break;
         }
+    }
+
+    private Vector3 ColliderFlip(Vector3 vec)
+    {
+        Vector3 newvec = vec;
+        newvec.x *= -1.0f;
+
+        return newvec;
     }
 }

@@ -15,14 +15,28 @@ public class Body_Fish_SubAttack : IState
     public void Enter()
     {
         body.SetAnimation("Fish_SubAttack");
-        body.GetComponent<BoxCollider>().enabled = true;
+        body.isAttacked = false;
     }
 
     public void Execute()
     {
+        var state = body.animator.GetCurrentAnimatorStateInfo(0);
+
+        if (body.isAttacked == false)
+        {
+            if (state.normalizedTime >= 0.7f)
+            {
+                body.GetComponent<BoxCollider>().enabled = true;
+            }
+
+            if (state.normalizedTime >= 0.9f)
+            {
+                body.GetComponent<BoxCollider>().enabled = false;
+            }
+        }
+
         if (body.AnimationFinished("Fish_SubAttack")) 
         {
-            body.GetComponent<BoxCollider>().enabled = false;
             body.ChangeState(new Body_Fish_Idle(body));
         }
     }

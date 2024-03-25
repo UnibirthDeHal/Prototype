@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class Control_Enemy : MonoBehaviour

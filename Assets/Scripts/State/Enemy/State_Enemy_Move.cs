@@ -12,8 +12,6 @@ public class State_Enemy_Move : IState
     private float LeftPosX;
     private float RightPosX;
     private float dir = -1.0f;
-    private int count;
-    private int countMax = 2;
 
     public State_Enemy_Move(Control_Enemy enemy)
     {
@@ -23,7 +21,6 @@ public class State_Enemy_Move : IState
     public void Enter()
     {
         // Move 状態に入ったときの初期化などを行う
-        count = 0;
         StartPosX = enemy.transform.position.x;
         LeftPosX = enemy.transform.position.x - (enemy.moverange / 2);
         RightPosX = enemy.transform.position.x + (enemy.moverange / 2);
@@ -35,12 +32,10 @@ public class State_Enemy_Move : IState
         if (enemy.transform.position.x <= LeftPosX)
         {
             dir = 1.0f;
-            count++;
         }
         else if (enemy.transform.position.x >= RightPosX)
         {
             dir = -1.0f;
-            count++;
         }
 
         //テクスチャーの向きを変わる

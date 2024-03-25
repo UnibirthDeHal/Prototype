@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class Control_Hand : MonoBehaviour
@@ -17,6 +16,7 @@ public class Control_Hand : MonoBehaviour
 
     [HideInInspector]public SpriteRenderer spriteRenderer;
     [HideInInspector]public Animator animator;
+    [HideInInspector] public bool isAttacked;
 
     private IState currentState;
 
@@ -29,6 +29,7 @@ public class Control_Hand : MonoBehaviour
     void Start()
     {
         nowstate = 0;
+        isAttacked= false;
         ChangeState(new Hand_Human_Idle(this));
     }
 
@@ -62,6 +63,8 @@ public class Control_Hand : MonoBehaviour
         if (other.tag == "Enemy")
         {
             other.gameObject.GetComponent<Control_Enemy>().Hp -= 2;
+            this.GetComponent<BoxCollider>().enabled = false;
+            isAttacked = true;
         }
     }
 }
