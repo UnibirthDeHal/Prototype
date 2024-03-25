@@ -16,12 +16,14 @@ public class Leg2_Fish_SubAttack : IState
     public void Enter()
     {
         leg2.SetAnimation("Fish_SubAttack");
+        leg2.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void Execute()
     {
         if (leg2.AnimationFinished("Fish_SubAttack"))
         {
+            leg2.GetComponent<BoxCollider>().enabled = false;
             leg2.ChangeState(new Leg2_Fish_Idle(leg2));   
         }
     }
@@ -30,4 +32,5 @@ public class Leg2_Fish_SubAttack : IState
     {
 
     }
+
 }

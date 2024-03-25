@@ -16,12 +16,14 @@ public class Leg2_Dragon_SubAttack : IState
     public void Enter()
     {
         leg2.SetAnimation("Dragon_SubAttack");
+        leg2.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void Execute()
     {
         if (leg2.AnimationFinished("Dragon_SubAttack"))
         {
+            leg2.GetComponent<BoxCollider>().enabled = false;
             leg2.ChangeState(new Leg2_Dragon_Idle(leg2));   
         }
     }

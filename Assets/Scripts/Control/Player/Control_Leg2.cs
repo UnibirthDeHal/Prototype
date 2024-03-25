@@ -53,4 +53,11 @@ public class Control_Leg2 : MonoBehaviour
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<Control_Enemy>().Hp -= 3;
+        }
+    }
 }
