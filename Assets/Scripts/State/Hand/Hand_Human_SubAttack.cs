@@ -15,12 +15,14 @@ public class Hand_Human_SubAttack : IState
     public void Enter()
     {
         hand.SetAnimation("Human_SubAttack");
+        hand.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void Execute()
     {
         if (hand.AnimationFinished("Human_SubAttack"))
         {
+            hand.GetComponent<BoxCollider>().enabled = false;
             hand.ChangeState(new Hand_Human_Idle(hand));
         }
     }

@@ -15,12 +15,14 @@ public class Hand_Dragon_SubAttack : IState
     public void Enter()
     {
         hand.SetAnimation("Dragon_SubAttack");
+        hand.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void Execute()
     {
         if (hand.AnimationFinished("Dragon_SubAttack"))
         {
+            hand.GetComponent<BoxCollider>().enabled = false;
             hand.ChangeState(new Hand_Dragon_Idle(hand));
         }
     }
