@@ -15,12 +15,14 @@ public class Head_Dragon_SubAttack : IState
     public void Enter()
     {
         head.SetAnimation("Dragon_Fire");
+        head.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void Execute()
     {
         if (head.AnimationFinished("Dragon_Fire"))
         {
+            head.GetComponent<BoxCollider>().enabled = false;
             head.ChangeState(new Head_Dragon_Idle(head));
         }
     }
