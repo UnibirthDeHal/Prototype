@@ -31,6 +31,11 @@ public class Control_Player : MonoBehaviour
     [Space, Header("[UIに関する]")]
     public GameObject slider_hp;                             //HPバー
     public GameObject slider_burden;                       //重量バー
+    public ChangeImage image_head;
+    public ChangeImage image_hands;
+    public ChangeImage image_body;
+    public ChangeImage image_leg1;
+    public ChangeImage image_leg2;
 
     [Space]
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -153,6 +158,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_head.nowstate = 1;
                         BurdenChange(5);
+                        image_head.ChangePartImage(1);
                         break;
                     }
                     else
@@ -166,6 +172,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_hands.nowstate = 1;
                         BurdenChange(5);
+                        image_hands.ChangePartImage(1);
                         break;
                     }
                     else
@@ -179,6 +186,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_body.nowstate = 1;
                         BurdenChange(5);
+                        image_body.ChangePartImage(1);
                         break;
                     }
                     else
@@ -192,6 +200,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_leg1.nowstate = 1;
                         BurdenChange(5);
+                        image_leg1.ChangePartImage(1);
                         break;
                     }
                     else
@@ -205,6 +214,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_leg2.nowstate = 1;
                         BurdenChange(5);
+                        image_leg2.ChangePartImage(1);
                         break;
                     }
                     else
@@ -237,6 +247,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_head.nowstate = 2;
                         BurdenChange(5);
+                        image_head.ChangePartImage(2);
                         break;
                     }
                     else
@@ -250,6 +261,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_body.nowstate = 2;
                         BurdenChange(5);
+                        image_body.ChangePartImage(2);
                         break;
                     }
                     else
@@ -263,6 +275,7 @@ public class Control_Player : MonoBehaviour
                     {
                         part_leg2.nowstate = 2;
                         BurdenChange(5);
+                        image_leg2.ChangePartImage(2);
                         break;
                     }
                     else
