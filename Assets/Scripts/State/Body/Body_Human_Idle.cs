@@ -19,6 +19,23 @@ public class Body_Human_Idle : IState
 
     public void Execute()
     {
+        if (body.nowstate == 0)
+        {
+            //body.ChangeState(new Body_Human_Idle(body));
+        }
+        else if (body.nowstate == 1)
+        {
+            body.ChangeState(new Body_Dragon_Idle(body));
+        }
+        else if (body.nowstate == 2)
+        {
+            body.ChangeState(new Body_Fish_Idle(body));
+        }
+        else
+        {
+            body.nowstate = 0;
+        }
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             body.ChangeState(new Body_Dragon_Idle(body));

@@ -35,6 +35,19 @@ public class Leg1_Dragon_Idle : IState
         {
             leg1.ChangeState(new Leg1_Human_Idle(leg1));
         }
+
+        if (leg1.nowstate == 0)
+        {
+            leg1.ChangeState(new Leg1_Human_Idle(leg1));
+        }
+        else if (leg1.nowstate == 1)
+        {
+            //leg1.ChangeState(new Leg1_Dragon_Idle(leg1));
+        }
+        else
+        {
+            leg1.nowstate = 1;
+        }
     }
 
     public void Exit()

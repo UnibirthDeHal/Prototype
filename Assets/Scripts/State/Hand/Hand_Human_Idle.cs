@@ -19,6 +19,19 @@ public class Hand_Human_Idle : IState
 
     public void Execute()
     {
+        if (hand.nowstate == 0)
+        {
+            //hand.ChangeState(new Hand_Human_Idle(hand));
+        }
+        else if (hand.nowstate == 1)
+        {
+            hand.ChangeState(new Hand_Dragon_Idle(hand));
+        }
+        else
+        {
+            hand.nowstate = 0;
+        }
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             hand.ChangeState(new Hand_Dragon_Idle(hand));

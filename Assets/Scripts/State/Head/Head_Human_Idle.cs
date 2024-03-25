@@ -20,6 +20,23 @@ public class Head_Human_Idle : IState
 
     public void Execute()
     {
+        if (head.nowstate == 0)
+        {
+            //head.ChangeState(new Head_Human_Idle(head));
+        }
+        else if (head.nowstate == 1)
+        {
+            head.ChangeState(new Head_Dragon_Idle(head));
+        }
+        else if (head.nowstate == 2)
+        {
+            head.ChangeState(new Head_Fish_Idle(head));
+        }
+        else
+        {
+            head.nowstate = 0;
+        }
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             head.ChangeState(new Head_Dragon_Idle(head));   

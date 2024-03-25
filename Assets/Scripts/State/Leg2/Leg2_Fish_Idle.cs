@@ -20,6 +20,23 @@ public class Leg2_Fish_Idle : IState
 
     public void Execute()
     {
+        if (leg2.nowstate == 0)
+        {
+            leg2.ChangeState(new Leg2_Human_Idle(leg2));
+        }
+        else if (leg2.nowstate == 1)
+        {
+            leg2.ChangeState(new Leg2_Dragon_Idle(leg2));
+        }
+        else if (leg2.nowstate == 2)
+        {
+            //leg2.ChangeState(new Leg2_Fish_Idle(leg2));
+        }
+        else
+        {
+            leg2.nowstate = 2;
+        }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             leg2.ChangeState(new Leg2_Human_Idle(leg2));   

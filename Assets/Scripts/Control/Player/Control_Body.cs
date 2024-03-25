@@ -13,6 +13,8 @@ public class Control_Body : MonoBehaviour
     public GameObject player;
 
     [Space]
+    public int nowstate;//(0:êl 1:ó≥ 2:ê[äCãõ)
+
     [HideInInspector]public SpriteRenderer spriteRenderer;
     [HideInInspector] public Animator animator;
 
@@ -26,6 +28,7 @@ public class Control_Body : MonoBehaviour
 
     void Start()
     {
+        nowstate = 0;
         ChangeState(new Body_Human_Idle(this));
     }
 
