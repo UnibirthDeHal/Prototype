@@ -8,7 +8,8 @@ public class BURDENSlider : MonoBehaviour
     Slider burdenSlider;
     Text burdenText;
 
-    float burden = 0f;
+    public float burden = 0f;
+    public bool ischange=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +25,11 @@ public class BURDENSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (ischange == true) 
         {
-            burden += 10f;
             burdenSlider.value = burden;
             burdenText.text = "BURDENÅ@" + burdenSlider.value.ToString() + "/" + burdenSlider.maxValue.ToString();
+            ischange = false;
         }
     }
 }

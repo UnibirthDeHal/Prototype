@@ -29,7 +29,7 @@ public class Control_Player : MonoBehaviour
     [HideInInspector] public string state_head;
 
     [Space, Header("[UIに関する]")]
-    public HPSlider slider_hp;                             //HPバー
+    public GameObject slider_hp;                             //HPバー
     public GameObject slider_burden;                       //重量バー
 
     [Space]
@@ -71,7 +71,7 @@ public class Control_Player : MonoBehaviour
 
         //初期化
         //moveSpeed = 5.0f;
-        hp_max = 125;
+        hp_max = 100;
         hp_cur = hp_max;
         dir = 6;
         random = 0;
@@ -152,6 +152,7 @@ public class Control_Player : MonoBehaviour
                     if (part_head.nowstate != 1)
                     {
                         part_head.nowstate = 1;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -164,6 +165,7 @@ public class Control_Player : MonoBehaviour
                     if (part_hands.nowstate != 1)
                     {
                         part_hands.nowstate = 1;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -176,6 +178,7 @@ public class Control_Player : MonoBehaviour
                     if (part_body.nowstate != 1)
                     {
                         part_body.nowstate = 1;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -188,6 +191,7 @@ public class Control_Player : MonoBehaviour
                     if (part_leg1.nowstate != 1)
                     {
                         part_leg1.nowstate = 1;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -200,6 +204,7 @@ public class Control_Player : MonoBehaviour
                     if (part_leg2.nowstate != 1)
                     {
                         part_leg2.nowstate = 1;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -231,6 +236,7 @@ public class Control_Player : MonoBehaviour
                     if (part_head.nowstate != 2)
                     {
                         part_head.nowstate = 2;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -243,6 +249,7 @@ public class Control_Player : MonoBehaviour
                     if (part_body.nowstate != 2)
                     {
                         part_body.nowstate = 2;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -255,6 +262,7 @@ public class Control_Player : MonoBehaviour
                     if (part_leg2.nowstate != 2)
                     {
                         part_leg2.nowstate = 2;
+                        BurdenChange(5);
                         break;
                     }
                     else
@@ -271,6 +279,7 @@ public class Control_Player : MonoBehaviour
         {
             moveSpeed += 2.0f;
             Debug.Log("ネズミ遺伝子ゲット、Speed Up" + 2.0f);
+            BurdenChange(1);
             // Itemとの接触時の処理をここに記述
 
             //ここにネズミ遺伝子を吸収したことを変異状況管理へ報告
@@ -283,9 +292,10 @@ public class Control_Player : MonoBehaviour
             if (slider_hp != null)
             {
                 Debug.Log("更新");
-                slider_hp.RefreshHealth();
+                slider_hp.GetComponent<HPSlider>().RefreshHealth();
             }
             Debug.Log("亀遺伝子ゲット、Hp Max Up" + 25.0f);
+            BurdenChange(1);
             // Itemとの接触時の処理をここに記述
 
             //ここに亀遺伝子を吸収したことを変異状況管理へ報告
@@ -326,5 +336,11 @@ public class Control_Player : MonoBehaviour
                 Debug.Log("各部位がちゃん設置されていない！");
             }
         }
+    }
+
+    private void BurdenChange(int burden)
+    {
+        slider_burden.GetComponent<BURDENSlider>().burden += burden;
+        slider_burden.GetComponent<BURDENSlider>().ischange = true;
     }
 }
