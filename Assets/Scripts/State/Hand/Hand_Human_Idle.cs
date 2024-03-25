@@ -32,12 +32,12 @@ public class Hand_Human_Idle : IState
             hand.nowstate = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            hand.ChangeState(new Hand_Dragon_Idle(hand));
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    hand.ChangeState(new Hand_Dragon_Idle(hand));
+        //}
 
-        else if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             hand.ChangeState(new Hand_Human_SubAttack(hand));
         }

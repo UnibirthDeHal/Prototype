@@ -29,6 +29,8 @@ public class ChangeImage : MonoBehaviour
 
     public void ChangePartImage(int state)
     {
+        this.GetComponent<Image>().color = Color.white;
+
         switch (state)
         {
             case 0:
@@ -46,5 +48,15 @@ public class ChangeImage : MonoBehaviour
         {
             this.GetComponent<Image>().color = imagecolor;
         }
+    }
+
+    public void BeSelete()
+    {
+        this.GetComponent<Image>().color = Color.red;
+    }
+
+    public void ColorReset()
+    {
+        this.GetComponent<Image>().color = Color.white;
     }
 }

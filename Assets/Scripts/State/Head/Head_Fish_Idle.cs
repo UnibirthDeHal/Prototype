@@ -37,10 +37,10 @@ public class Head_Fish_Idle : IState
             head.nowstate = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            head.ChangeState(new Head_Human_Idle(head));
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    head.ChangeState(new Head_Human_Idle(head));
+        //}
     }
 
     public void Exit()

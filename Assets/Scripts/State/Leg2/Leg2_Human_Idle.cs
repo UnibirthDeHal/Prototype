@@ -37,10 +37,10 @@ public class Leg2_Human_Idle : IState
             leg2.nowstate = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            leg2.ChangeState(new Leg2_Dragon_Idle(leg2));   
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    leg2.ChangeState(new Leg2_Dragon_Idle(leg2));   
+        //}
     }
 
     public void Exit()

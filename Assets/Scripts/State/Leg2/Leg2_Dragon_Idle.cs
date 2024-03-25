@@ -37,15 +37,23 @@ public class Leg2_Dragon_Idle : IState
             leg2.nowstate = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (leg2.player.now_part == 3)
         {
-            leg2.ChangeState(new Leg2_Fish_Idle(leg2));
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                leg2.ChangeState(new Leg2_Dragon_SubAttack(leg2));
+            }
         }
 
-        else if (Input.GetKeyDown(KeyCode.H))
-        {
-            leg2.ChangeState(new Leg2_Dragon_SubAttack(leg2));
-        }
+
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    leg2.ChangeState(new Leg2_Fish_Idle(leg2));
+        //}
+        //else if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    leg2.ChangeState(new Leg2_Dragon_SubAttack(leg2));
+        //}
     }
 
     public void Exit()

@@ -36,15 +36,22 @@ public class Head_Dragon_Idle : IState
             head.nowstate = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (head.player.GetComponent<Control_Player>().now_part == 1)
         {
-            head.ChangeState(new Head_Fish_Idle(head));
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                head.ChangeState(new Head_Dragon_SubAttack(head));
+            }
         }
 
-        else if (Input.GetKeyDown(KeyCode.J))
-        {
-            head.ChangeState(new Head_Dragon_SubAttack(head));
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    head.ChangeState(new Head_Fish_Idle(head));
+        //}
+        //else if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    head.ChangeState(new Head_Dragon_SubAttack(head));
+        //}
     }
 
     public void Exit()

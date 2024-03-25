@@ -36,15 +36,23 @@ public class Body_Fish_Idle : IState
             body.nowstate = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (body.player.GetComponent<Control_Player>().now_part == 2)
         {
-            body.ChangeState(new Body_Human_Idle(body));
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                body.ChangeState(new Body_Fish_SubAttack(body));
+            }
         }
 
-        else if (Input.GetKeyDown(KeyCode.K))
-        {
-            body.ChangeState(new Body_Fish_SubAttack(body));
-        }
+
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    body.ChangeState(new Body_Human_Idle(body));
+        //}
+        //else if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    body.ChangeState(new Body_Fish_SubAttack(body));
+        //}
     }
 
     public void Exit()

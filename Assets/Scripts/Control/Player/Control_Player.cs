@@ -48,6 +48,7 @@ public class Control_Player : MonoBehaviour
 
     [HideInInspector] public int dir;
     [HideInInspector] private int random;
+    [HideInInspector] public int now_part;
 
     //public float move_speed;
     [HideInInspector] public float timer_noInput;
@@ -80,6 +81,7 @@ public class Control_Player : MonoBehaviour
         hp_cur = hp_max;
         dir = 6;
         random = 0;
+        now_part = -1;
         isjump = false;
         isfall = false;
     }
@@ -99,6 +101,16 @@ public class Control_Player : MonoBehaviour
         {
             isjump = true;
             ChangeState(new Player_State_Jump(this));
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            SelectPart(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            SelectPart(false);
         }
     }
 
@@ -355,5 +367,149 @@ public class Control_Player : MonoBehaviour
     {
         slider_burden.GetComponent<BURDENSlider>().burden += burden;
         slider_burden.GetComponent<BURDENSlider>().ischange = true;
+    }
+
+    private void SelectPart(bool isE)
+    {
+        if (isE == true)
+        {
+            now_part++;
+        }
+        else 
+        {
+            now_part--;
+        }
+
+        if (now_part < 1)
+        {
+            now_part = 3;
+        }
+        else if (now_part > 3)
+        {
+            now_part = 1;
+        }
+
+        for (int i = 0; i < 4; i++) 
+        {
+            if(i==3)
+            {
+                now_part = -1;
+                break;
+            }
+
+            if (now_part == 1)//頭
+            {
+                if (part_head.nowstate == 1)
+                {
+                    break;
+                }
+                else
+                {
+                    if (isE == true)
+                    {
+                        now_part++;
+                    }
+                    else
+                    {
+                        now_part--;
+                    }
+
+                    if (now_part < 1)
+                    {
+                        now_part = 3;
+                    }
+                    else if (now_part > 3)
+                    {
+                        now_part = 1;
+                    }
+                    continue;
+                }
+            }
+            else if (now_part == 2)//胴体
+            {
+                if (part_body.nowstate == 2)
+                {
+                    break;
+                }
+                else
+                {
+                    if (isE == true)
+                    {
+                        now_part++;
+                    }
+                    else
+                    {
+                        now_part--;
+                    }
+
+                    if (now_part < 1)
+                    {
+                        now_part = 3;
+                    }
+                    else if (now_part > 3)
+                    {
+                        now_part = 1;
+                    }
+                    continue;
+                }
+            }
+            else if (now_part == 3)//尻尾
+            {
+                if (part_leg2.nowstate == 1)
+                {
+                    break;
+                }
+                else if (part_leg2.nowstate == 2)
+                {
+                    break;
+                }
+                else
+                {
+                    if (isE == true)
+                    {
+                        now_part++;
+                    }
+                    else
+                    {
+                        now_part--;
+                    }
+
+                    if (now_part < 1)
+                    {
+                        now_part = 3;
+                    }
+                    else if (now_part > 3)
+                    {
+                        now_part = 1;
+                    }
+                    continue;
+                }
+            }
+        }
+
+        if (now_part != -1)
+        {
+            SelectUI();
+        }
+    }
+
+    private void SelectUI()
+    {
+        image_head.ColorReset();
+        image_body.ColorReset();
+        image_leg2.ColorReset();
+
+        switch (now_part)
+        {
+            case 1:
+                image_head.BeSelete();
+                break;
+            case 2:
+                image_body.BeSelete();
+                break;
+            case 3:
+                image_leg2.BeSelete();
+                break;
+        }
     }
 }

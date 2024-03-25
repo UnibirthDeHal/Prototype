@@ -31,10 +31,10 @@ public class Leg1_Dragon_Idle : IState
             leg1.ChangeState(new Leg1_Dragon_Move(leg1));
         }
 
-        else if (Input.GetKeyDown(KeyCode.V))
-        {
-            leg1.ChangeState(new Leg1_Human_Idle(leg1));
-        }
+        //else if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    leg1.ChangeState(new Leg1_Human_Idle(leg1));
+        //}
 
         if (leg1.nowstate == 0)
         {
