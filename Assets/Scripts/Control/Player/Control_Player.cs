@@ -78,6 +78,9 @@ public class Control_Player : MonoBehaviour
 
     void Update()
     {
+        Vector3 position = transform.position;
+        position.z = 0;
+        transform.position = position;
 
         currentState?.Execute();
 
