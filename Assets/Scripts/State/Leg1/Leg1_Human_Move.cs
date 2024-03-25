@@ -39,7 +39,13 @@ public class Leg1_Human_Move : IState
         // À•WˆÚ“®ŒvZ
         leg1.player.transform.position += new Vector3(move_input, 0, 0) * leg1.player.moveSpeed * Time.deltaTime;
 
-        if (Input.GetAxisRaw("Horizontal") == 0)
+
+        if (leg1.player.isjump == true)
+        {
+            leg1.ChangeState(new Leg1_Human_Jump(leg1));
+        }
+
+        else if (Input.GetAxisRaw("Horizontal") == 0)
         {
             leg1.ChangeState(new Leg1_Human_Idle(leg1));
         }

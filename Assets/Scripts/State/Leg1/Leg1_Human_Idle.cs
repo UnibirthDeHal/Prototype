@@ -21,14 +21,19 @@ public class Leg1_Human_Idle : IState
     public void Execute()
     {
         //ÅyèÛë‘ëJà⁄ÅzMoveèÛë‘Ç…
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (leg1.player.isjump == true)
+        {
+            leg1.ChangeState(new Leg1_Human_Jump(leg1));
+        }
+
+        else if (Input.GetAxisRaw("Horizontal") != 0)
         {
             leg1.ChangeState(new Leg1_Human_Move(leg1));
         }
 
         else if (Input.GetKeyDown(KeyCode.V))
         {
-            leg1.ChangeState(new Leg1_Dragon_Idle(leg1));   
+            leg1.ChangeState(new Leg1_Dragon_Idle(leg1));
         }
     }
 

@@ -32,6 +32,7 @@ public class State_Player_Fall : IState
             // ’n–Ê‚ÉÚG‚µ‚½ê‡AIdleó‘Ô‚Ö‘JˆÚ
             if (hit.collider != null)
             {
+                player.isfall = false;
                 player.ChangeState(new Player_State_Idle(player));
             }
         }

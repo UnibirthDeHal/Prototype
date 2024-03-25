@@ -21,7 +21,12 @@ public class Leg1_Dragon_Idle : IState
     public void Execute()
     {
         //yó‘Ô‘JˆÚzMoveó‘Ô‚É
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (leg1.player.isjump == true)
+        {
+            leg1.ChangeState(new Leg1_Dragon_Jump(leg1));
+        }
+
+        else if(Input.GetAxisRaw("Horizontal") != 0)
         {
             leg1.ChangeState(new Leg1_Dragon_Move(leg1));
         }

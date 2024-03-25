@@ -45,6 +45,8 @@ public class Control_Player : MonoBehaviour
     //public float move_speed;
     [HideInInspector] public float timer_noInput;
     [HideInInspector] public float threshold_noInput;
+    [HideInInspector] public bool isjump;
+    [HideInInspector] public bool isfall;
 
     // Rigidbodyの定義を修正
     private Rigidbody rb;
@@ -70,6 +72,8 @@ public class Control_Player : MonoBehaviour
         hp_max = 125;
         hp_cur = hp_max;
         dir = 6;
+        isjump = false;
+        isfall = false;
     }
 
     void Update()
@@ -82,6 +86,7 @@ public class Control_Player : MonoBehaviour
         // ジャンプ入力の検出
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
+            isjump = true;
             ChangeState(new Player_State_Jump(this));
         }
 

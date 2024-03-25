@@ -38,6 +38,11 @@ public class Leg1_Dragon_Move : IState
         // À•WˆÚ“®ŒvZ
         leg1.player.transform.position += new Vector3(move_input, 0, 0) * leg1.player.moveSpeed * Time.deltaTime;
 
+        if (leg1.player.isjump == true)
+        {
+            leg1.ChangeState(new Leg1_Dragon_Jump(leg1));
+        }
+
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
             leg1.ChangeState(new Leg1_Dragon_Idle(leg1));

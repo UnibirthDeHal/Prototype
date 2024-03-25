@@ -30,6 +30,8 @@ public class Player_State_Jump : IState
         }
         else if (rb.velocity.y < 0)
         {
+            player.isjump = false;
+            player.isfall = true;
             player.ChangeState(new State_Player_Fall(player));
             return;
         }
@@ -45,10 +47,12 @@ public class Player_State_Jump : IState
             player.isGrounded = true;
             if (Mathf.Abs(horizontalInput) > 0)
             {
+                player.isjump = false;
                 player.ChangeState(new Player_State_Move(player));
             }
             else
             {
+                player.isjump = false;
                 player.ChangeState(new Player_State_Idle(player));
             }
         }
