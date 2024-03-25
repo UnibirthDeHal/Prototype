@@ -21,7 +21,7 @@ public class Body_Human_Idle : IState
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            body.ChangeState(new Body_Fish_Idle(body));
+            body.ChangeState(new Body_Dragon_Idle(body));
         }
     }
 

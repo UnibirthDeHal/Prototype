@@ -53,4 +53,11 @@ public class Control_Body : MonoBehaviour
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<Control_Enemy>().Hp = -1;
+        }
+    }
 }

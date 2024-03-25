@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Body_Fish_SubAttack : IState
+public class Body_Dragon_Idle : IState
 {
     private Control_Body body;
 
-    public Body_Fish_SubAttack(Control_Body Body)
+    public Body_Dragon_Idle(Control_Body Body)
     {
         this.body = Body;
     }
 
     public void Enter()
     {
-        body.SetAnimation("Fish_SubAttack");
-        body.GetComponent<BoxCollider>().enabled = true;
+        body.SetAnimation("Dragon_Idle");
     }
 
     public void Execute()
     {
-        if (body.AnimationFinished("Fish_SubAttack")) 
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            body.GetComponent<BoxCollider>().enabled = false;
             body.ChangeState(new Body_Fish_Idle(body));
         }
     }
